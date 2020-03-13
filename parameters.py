@@ -1,3 +1,17 @@
+# -----------------------------------------------------------
+# This module represents a parameters object for genetic algorithm.
+#
+# Parameters include:
+# (1) genotype_length
+# (2) population_size
+# (3) maximum_generations
+# (4) mutation_rate
+# (5) crossover_rate
+#
+#
+# (C) 2020 Muhammad Bilal Akmal, 17K-3669
+# -----------------------------------------------------------
+
 class Parameters:
 
     def __init__(
