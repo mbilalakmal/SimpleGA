@@ -12,10 +12,10 @@
 # -----------------------------------------------------------
 
 import random
+from functools import total_ordering
 
 import numpy as np
 
-from functools import total_ordering
 
 @total_ordering
 class Chromosome:
