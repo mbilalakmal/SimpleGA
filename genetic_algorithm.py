@@ -1,11 +1,13 @@
 # -----------------------------------------------------------
 # This module represents a GeneticAlgorithm.
 #
-# A Chromosome can be:
-# (1) initialized randomly,
-# (2) mutated,
-# (3) initialized by performing crossover,
-# (4) fitness calculated
+# A genetic algorithm must be provided with:
+# (1) chromosome length,
+# (2) population size,
+# (3) and number of generations
+#
+# After initialization, a single method 'run' will
+# operate to generate new generations until a solution is found.
 #
 #
 # (C) 2020 Muhammad Bilal Akmal, 17K-3669
@@ -27,11 +29,6 @@ class GeneticAlgorithm:
             shape=(parameters.population_size,),
             dtype=Chromosome
         )
-
-        self.generation = 0
-        self.optimum_reached = False
-        self.best_fitness = 0.0
-        self.best_chromosome = None
         self._parameters = parameters
 
 
@@ -57,6 +54,8 @@ class GeneticAlgorithm:
             # create next generation by selective crossover and mutation
             self._reproduce()
 
+        return self.optimum_reached
+
 
     def describe(self):
         '''
@@ -74,6 +73,11 @@ class GeneticAlgorithm:
 
         Also sets `best_fitness` and `best_chromosome`.
         '''
+        self.generation = 0
+        self.optimum_reached = False
+        self.best_fitness = 0.0
+        self.best_chromosome = None
+
         parameters = self._parameters
 
         for i in range(parameters.population_size):
@@ -124,7 +128,6 @@ class GeneticAlgorithm:
         self._population = population
 
         self._track_best()
-        
         self.generation += 1
 
 
