@@ -138,8 +138,8 @@ class GeneticAlgorithm:
         `pressure` chromosomes are randomly sampled from the population
         and the chromosome with maximum fitness is returned.
         '''
-        if pressure > self._parameters.population_size or pressure < 2:
-            pressure = 2
+        if pressure >= self._parameters.population_size or pressure < 1:
+            pressure = 1
 
         return np.amax(
             np.random.choice(self._population, size=(pressure,))
