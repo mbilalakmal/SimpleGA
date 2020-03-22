@@ -35,19 +35,14 @@ def evaluate_chromosome_length(
 
     for idx, value in enumerate(range(start, stop, step)):
         parameters = Parameters(value, pop_size, max_gens)
-        print('Length', parameters.genotype_length)
         chr_lnth[idx] = value
 
         results = _run_trials(parameters, trials)
-        print('result', results, idx, value)
         completion_times[idx] = results[0]
         success_rates[idx] = results[1]
 
     # convert rates to percentages
     success_rates *= 100
-
-    print(completion_times)
-    print(success_rates)
 
     # plot Completion Times
     plt.subplot(211)
