@@ -4,9 +4,9 @@ import PySimpleGUI as sg
 
 import evaluation as ev
 
-parameters = ['Chromosome Length',
-'Population Size',
-'Maximum Generations']
+parameters = ['Chromosome Length'.ljust(20),
+'Population Size'.ljust(20),
+'Maximum Generations'.ljust(20)]
 
 sg.theme('DarkBlue')
 
@@ -41,9 +41,9 @@ layout = [
     
     [sg.Frame(title='Other Parameters',
         layout=[
-            [sg.Text(parameters[1], key='_FIRST_'),
+            [sg.Text(parameters[1], key='_FIRST_', font='Courier 10'),
             sg.Spin([i for i in range(2,10000)], initial_value=2, size=(12,1), key='_FIRST_VAL_')],
-            [sg.Text(parameters[2], key='_SECOND_'),
+            [sg.Text(parameters[2], key='_SECOND_', font='Courier 10'),
             sg.Spin([i for i in range(2,10000)], initial_value=2, size=(12,1), key='_SECOND_VAL_')],
             [sg.Text('')],  #padding
             [sg.Text('Number of Trials'),
