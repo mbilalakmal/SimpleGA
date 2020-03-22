@@ -1,4 +1,18 @@
-# frontend stuff
+# -----------------------------------------------------------
+# This module defines the GUI.
+#
+# A GUI window asks user for:
+# (1) Parameters which is to be evaluated,
+# (2) range of values to test for the selected parameter,
+# (3) values of remaining parameters
+# (4) Trials - this is how many times each configuration is run
+#
+# After user describes everything, the app does heavy computing
+# on the main thread (causing the GUI to hang) and draws a graph.
+#
+#
+# (C) 2020 Muhammad Bilal Akmal, 17K-3669
+# -----------------------------------------------------------
 
 import PySimpleGUI as sg
 
@@ -94,7 +108,7 @@ while True:
 
         start = int(values['_START_'])
         stop = int(values['_STOP_'])
-        step = int(values['_STEP_'])
+        step = int(values['_STEP_']) + 1 #closed interval
 
         eval_parameter = values['_COMBO_']
         first_parameter = int(values['_FIRST_VAL_'])
