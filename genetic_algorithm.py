@@ -63,7 +63,7 @@ class GeneticAlgorithm:
         '''
         print(f'Generation: {self.generation}')
         print(f'Best Fitness: {self.best_fitness}')
-        print(f'Best Chromosome: {self.best_chromosome}')
+        print(f'Best Chromosome: {self._population[self.best_chromosome]._genotype}')
         print(f'Optimum reached: {self.optimum_reached}')
 
 
