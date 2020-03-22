@@ -107,8 +107,8 @@ while True:
     elif event == 'RUN ALGORITHM':
 
         start = int(values['_START_'])
-        stop = int(values['_STOP_'])
-        step = int(values['_STEP_']) + 1 #closed interval
+        stop = int(values['_STOP_']) + 1 #closed interval
+        step = int(values['_STEP_'])
 
         eval_parameter = values['_COMBO_']
         first_parameter = int(values['_FIRST_VAL_'])
