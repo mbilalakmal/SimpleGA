@@ -4,16 +4,21 @@ import PySimpleGUI as sg
 
 import evaluation as ev
 
-parameters = ['Chromosome Length', 'Population Size', 'Maximum Generations']
+parameters = ['Chromosome Length',
+'Population Size',
+'Maximum Generations']
 
 sg.theme('DarkBlue')
 
 layout = [
     [sg.Text('')],  #padding
-    [sg.Image(r'resources\icon.png'), sg.Text('SimpleGA', font=('Helvetica', 21))], #Title
+    [sg.Image(r'resources\icon.png'),
+    sg.Text('SimpleGA', font=('Helvetica', 21))], #Title
+
     [sg.Text('A program for parameters evalutaion for a genetic algorithm.',
     font=('Helvetica', 12))
-    ],
+    ],  #subtitle
+
     [sg.Text('_'  * 80)],
     [sg.Text('Evaluate Parameter: '),
     sg.Combo(
@@ -26,13 +31,14 @@ layout = [
     )
     ],#combobox with parameter selection
     [sg.Text('')],  #padding
+
     [sg.Text('Start'),
     sg.Spin([i for i in range(2,10000)], initial_value=2, size=(16,1), key='_START_')],
     [sg.Text('Stop'),
-    sg.Spin([i for i in range(2,10000)], initial_value=2, size=(16,1), key='_STOP_')],
+    sg.Spin([i for i in range(2,10000)], initial_value=4, size=(16,1), key='_STOP_')],
     [sg.Text('Step'),
     sg.Spin([i for i in range(1,10000)], initial_value=1, size=(16,1), key='_STEP_')],
-    # [sg.Text('')],  #padding
+    
     [sg.Frame(title='Other Parameters',
         layout=[
             [sg.Text(parameters[1], key='_FIRST_'),
@@ -42,7 +48,7 @@ layout = [
             [sg.Text('')],  #padding
             [sg.Text('Number of Trials'),
             sg.Spin([i for i in range(10,10000,10)], initial_value=10, size=(12,1), key='_TRIALS_')],
-            # [sg.Text('')],  #padding
+            
         ],
     )],
     [sg.Text('')],  #padding
@@ -97,8 +103,8 @@ while True:
                 start=start,
                 stop=stop,
                 step=step,
-                population_size=first_parameter,
-                maximum_generations=second_parameter,
+                pop_size=first_parameter,
+                max_gens=second_parameter,
                 trials=trials
             )
 
@@ -107,8 +113,8 @@ while True:
                 start=start,
                 stop=stop,
                 step=step,
-                maximum_generations=first_parameter,
-                chromosome_length=second_parameter,
+                max_gens=first_parameter,
+                chr_lnth=second_parameter,
                 trials=trials
             )
 
@@ -117,8 +123,8 @@ while True:
                 start=start,
                 stop=stop,
                 step=step,
-                chromosome_length=first_parameter,
-                population_size=second_parameter,
+                chr_lnth=first_parameter,
+                pop_size=second_parameter,
                 trials=trials
             )
 
