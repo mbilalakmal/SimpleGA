@@ -1,3 +1,17 @@
+# -----------------------------------------------------------
+# This module provides evaluation functions for each parameter.
+#
+# Each evaluation function:
+# (1) Runs genetic algorithm on defined parameters
+# (2) Calculates running time
+# (3) Calculates success rate (where optimum solution is found)
+# (4) Creates a matplotlib figure (pyplot)
+# (5) Plots running time and success rate against the parameter
+#
+#
+# (C) 2020 Muhammad Bilal Akmal, 17K-3669
+# -----------------------------------------------------------
+
 import time
 
 import matplotlib.pyplot as plt
