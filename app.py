@@ -56,7 +56,7 @@ layout = [
         ],
     )],
     [sg.Text('')],  #padding
-    [sg.Button('RUN ALGORITHM')],
+    [sg.Button('RUN ALGORITHM', bind_return_key=True)],
     [sg.Text('')],  #padding
 ]
 
