@@ -24,87 +24,146 @@ def _run_trials(parameters: Parameters, trials: int):
 
 
 def evaluate_chromosome_length(
-    start, stop, step, population_size, maximum_generations, trials):
+    start, stop, step, pop_size, max_gens, trials):
 
-    chromosome_lengths  = []
-    completion_times    = []
-    success_rates       = []
+    # calculate number of iterations [performance]
+    iterations = (lambda x,y,z: (y-x)//z + ((y-x)%z>0))(start, stop, step)
 
-    for i in range(start, stop, step):
-        parameters = Parameters(i, population_size, maximum_generations)
-        chromosome_lengths.append(i)
+    chr_lnth  = np.empty((iterations,), dtype=int)
+    completion_times = np.empty((iterations,), dtype=float)
+    success_rates = np.empty((iterations,), dtype=float)
+
+    for idx, value in enumerate(range(start, stop, step)):
+        parameters = Parameters(value, pop_size, max_gens)
+        print('Length', parameters.genotype_length)
+        chr_lnth[idx] = value
+
         results = _run_trials(parameters, trials)
-        completion_times.append(results[0])
-        success_rates.append(results[1]*100)
+        print('result', results, idx, value)
+        completion_times[idx] = results[0]
+        success_rates[idx] = results[1]
+
+    # convert rates to percentages
+    success_rates *= 100
+
+    print(completion_times)
+    print(success_rates)
 
     # plot Completion Times
     plt.subplot(211)
-    plt.title('Effect of chromosome length on peformance.')
-    plt.plot(chromosome_lengths, completion_times, 'b.-', label='time (s)')
+    plt.title('Effect Of Chromosome Length On Performance.',
+    style='italic', fontsize=14) # title
+    
+    plt.plot(chr_lnth, completion_times, 'b.-', label='completion time (s)')
     plt.legend()
 
     # plot Success Rates
     plt.subplot(212)
     plt.xlabel('Chromosome length [bits]')
-    plt.plot(chromosome_lengths, success_rates, 'r.-', label='success rate (%)')
+    plt.plot(chr_lnth, success_rates, 'r.-', label='success rate (%)')
     plt.legend()
+
+    #Show parameters
+    plt.suptitle(
+        f'Range({start},{stop},{step}) '
+        f'| Population: {pop_size} '
+        f'| Maximum Generations: {max_gens} '
+        f'| Trials: {trials}',
+        fontsize=10, fontweight='light', color='brown'
+    )
     
     plt.show(block=False)
 
 
 def evaluate_population_size(
-    start, stop, step, maximum_generations, chromosome_length, trials):
+    start, stop, step, max_gens, chr_lnth, trials):
 
-    population_sizes    = []
-    completion_times    = []
-    success_rates       = []
+    # calculate number of iterations [performance]
+    iterations = (lambda x,y,z: (y-x)//z + ((y-x)%z>0))(start, stop, step)
 
-    for i in range(start, stop, step):
-        parameters = Parameters(chromosome_length, i, maximum_generations)
-        population_sizes.append(i)
+    pop_size  = np.empty((iterations,), dtype=int)
+    completion_times = np.empty((iterations,), dtype=float)
+    success_rates = np.empty((iterations,), dtype=float)
+
+    for idx, value in enumerate(range(start, stop, step)):
+        parameters = Parameters(chr_lnth, value, max_gens)
+        pop_size[idx] = value
+
         results = _run_trials(parameters, trials)
-        completion_times.append(results[0])
-        success_rates.append(results[1]*100)
+        completion_times[idx] = results[0]
+        success_rates[idx] = results[1]
+
+    # convert rates to percentages
+    success_rates *= 100
 
     # plot Completion Times
     plt.subplot(211)
-    plt.title('Effect of population size on peformance.')
-    plt.plot(population_sizes, completion_times, 'b.-', label='time (s)')
+    plt.title('Effect Of Population Size On Peformance.',
+    style='italic', fontsize=14) # title
+
+    plt.plot(pop_size, completion_times, 'b.-', label='completion time (s)')
     plt.legend()
 
     # plot Success Rates
     plt.subplot(212)
     plt.xlabel('Population size [units]')
-    plt.plot(population_sizes, success_rates, 'r.-', label='success rate (%)')
+    plt.plot(pop_size, success_rates, 'r.-', label='success rate (%)')
     plt.legend()
     
+    #Show parameters
+    plt.suptitle(
+        f'Range({start},{stop},{step}) '
+        f'| Chromosome Length: {chr_lnth} '
+        f'| Maximum Generations: {max_gens} '
+        f'| Trials: {trials}',
+        fontsize=10, fontweight='light', color='brown'
+    )
+
     plt.show(block=False)
 
 
 def evaluate_maximum_generations(
-    start, stop, step, chromosome_length, population_size, trials):
+    start, stop, step, chr_lnth, pop_size, trials):
 
-    maximum_generations = []
-    completion_times    = []
-    success_rates       = []
+    # calculate number of iterations [performance]
+    iterations = (lambda x,y,z: (y-x)//z + ((y-x)%z>0))(start, stop, step)
 
-    for i in range(start, stop, step):
-        parameters = Parameters(chromosome_length, population_size, i)
-        maximum_generations.append(i)
+    max_gens  = np.empty((iterations,), dtype=int)
+    completion_times = np.empty((iterations,), dtype=float)
+    success_rates = np.empty((iterations,), dtype=float)
+
+    for idx, value in enumerate(range(start, stop, step)):
+        parameters = Parameters(chr_lnth, pop_size, value)
+        max_gens[idx] = value
+
         results = _run_trials(parameters, trials)
-        completion_times.append(results[0])
-        success_rates.append(results[1]*100)
+        completion_times[idx] = results[0]
+        success_rates[idx] = results[1]
+
+    # convert rates to percentages
+    success_rates *= 100
 
     # plot Completion Times
     plt.subplot(211)
-    plt.title('Effect of maximum generations on peformance.')
-    plt.plot(maximum_generations, completion_times, 'b.-', label='time (s)')
+    plt.title('Effect Of Maximum Generations On Peformance.',
+    style='italic', fontsize=14) # title
+
+    plt.plot(max_gens, completion_times, 'b.-', label='completion time (s)')
     plt.legend()
 
     # plot Success Rates
     plt.subplot(212)
     plt.xlabel('Maximum generations [units]')
-    plt.plot(maximum_generations, success_rates, 'r.-', label='success rate (%)')
+    plt.plot(max_gens, success_rates, 'r.-', label='success rate (%)')
     plt.legend()
     
+    #Show parameters
+    plt.suptitle(
+        f'Range({start},{stop},{step}) '
+        f'| Chromosome Length: {chr_lnth} '
+        f'| Population: {pop_size} '
+        f'| Trials: {trials}',
+        fontsize=10, fontweight='light', color='brown'
+    )
+
     plt.show(block=False)
