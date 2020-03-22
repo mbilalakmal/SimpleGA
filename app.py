@@ -32,22 +32,26 @@ layout = [
     ],#combobox with parameter selection
     [sg.Text('')],  #padding
 
-    [sg.Text('Start'),
-    sg.Spin([i for i in range(2,10000)], initial_value=2, size=(16,1), key='_START_')],
-    [sg.Text('Stop'),
-    sg.Spin([i for i in range(2,10000)], initial_value=4, size=(16,1), key='_STOP_')],
-    [sg.Text('Step'),
-    sg.Spin([i for i in range(1,10000)], initial_value=1, size=(16,1), key='_STEP_')],
-    
-    [sg.Frame(title='Other Parameters',
+    # range(start, stop, step)
+    [
+    sg.Text('Start'),
+    sg.Spin([i for i in range(2,10000)], initial_value=2, size=(6,1), key='_START_'),
+    sg.Text('   Stop'),
+    sg.Spin([i for i in range(2,10000)], initial_value=4, size=(6,1), key='_STOP_'),
+    sg.Text('   Step'),
+    sg.Spin([i for i in range(1,10000)], initial_value=1, size=(6,1), key='_STEP_'),
+    ],
+
+    [sg.Text('')],  #padding
+    [sg.Frame(title='   Other Parameters    ',
         layout=[
             [sg.Text(parameters[1], key='_FIRST_', font='Courier 10'),
-            sg.Spin([i for i in range(2,10000)], initial_value=2, size=(12,1), key='_FIRST_VAL_')],
+            sg.Spin([i for i in range(2,10000)], initial_value=2, size=(10,1), key='_FIRST_VAL_')],
             [sg.Text(parameters[2], key='_SECOND_', font='Courier 10'),
-            sg.Spin([i for i in range(2,10000)], initial_value=2, size=(12,1), key='_SECOND_VAL_')],
+            sg.Spin([i for i in range(2,10000)], initial_value=2, size=(10,1), key='_SECOND_VAL_')],
             [sg.Text('')],  #padding
-            [sg.Text('Number of Trials'),
-            sg.Spin([i for i in range(10,10000,10)], initial_value=10, size=(12,1), key='_TRIALS_')],
+            [sg.Text('Number of Trials'.ljust(20), font='Courier 10'),
+            sg.Spin([i for i in range(10,10000,10)], initial_value=10, size=(10,1), key='_TRIALS_')],
             
         ],
     )],
