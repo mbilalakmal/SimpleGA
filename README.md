@@ -2,6 +2,8 @@
 
 SimpleGA is a Python library for evaluating effects of different parameters on a simple genetic algorithm.
 
+![App Screenshot](/resources/screenshot.png?raw=true "App Screenshot")
+
 ## Installation
 
 Clone the project.
